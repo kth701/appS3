@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - S3UploaderTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>S3UploaderTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.example.apps3.util.html">com.example.apps3.util</a> &gt; S3UploaderTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">1.711s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a href="#">Tests</a>
+</li>
+<li>
+<a href="#">Standard output</a>
+</li>
+<li>
+<a href="#">Standard error</a>
+</li>
+</ul>
+<div class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">testUploadRealS3()</td>
+<td class="success">1.711s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>14:27:11.153 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.apps3.util.S3UploaderTest]: S3UploaderTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:27:11.266 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.apps3.Apps3Application for test class com.example.apps3.util.S3UploaderTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2026-04-07T14:27:11.751+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3UploaderTest    : Starting S3UploaderTest using Java 21.0.9 with PID 45520 (started by kth_7 in C:\Study\200_AWS_Study\aws_project_test\apps3)
+2026-04-07T14:27:11.754+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3UploaderTest    : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2026-04-07T14:27:13.527+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3UploaderTest    : Started S3UploaderTest in 2.066 seconds (process running for 3.269)
+2026-04-07T14:27:14.292+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3UploaderTest    : 테스트 파일 생성됨: C:\upload\test_1775539634287.jpg
+2026-04-07T14:27:14.963+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3Uploader        : S3 업로드 성공: test_1775539634287.jpg
+2026-04-07T14:27:14.965+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3UploaderTest    : 실제 S3 업로드 URL (kth-s3-web-bucket): https://kth-s3-web-bucket.s3.ap-northeast-2.amazonaws.com/test_1775539634287.jpg
+2026-04-07T14:27:15.109+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3UploaderTest    : S3 객체 존재 확인 성공: 버킷=kth-s3-web-bucket, 키=test_1775539634287.jpg, 크기=55 bytes
+2026-04-07T14:27:15.257+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3Uploader        : S3 파일 삭제 성공: test_1775539634287.jpg
+2026-04-07T14:27:15.258+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3UploaderTest    : 테스트 후 S3 파일 삭제 완료: test_1775539634287.jpg
+</pre>
+</span>
+</div>
+<div class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>WARNING: A Java agent has been loaded dynamically (C:\Users\kth_7\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.13\979ce25f7d3096a2e82214ba7dc972a05ce7a171\byte-buddy-agent-1.14.13.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="https://www.gradle.org">Gradle 8.14.4</a> at 2026. 4. 7. 오후 2:27:15</p>
+</div>
+</div>
+</body>
+</html>

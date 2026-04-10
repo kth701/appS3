@@ -1,0 +1,152 @@
+package com.example.apps3.util;
+
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+
+
+
+@Component
+@RequiredArgsConstructor
+@Log4j2
+public class S3Uploader {
+
+    // AWS S3 클라이언트 주입 (Spring Bean 사용)
+    private final AmazonS3Client amazonS3Client;
+
+    // application.properties에서 버킷 이름 가져옴
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucket;
+
+    // 로컬 경로의 파일을 S3에 업로드하고, 업로드 성공 시 URL 반환
+    // 로컬 파일 삭제는 호출자가 결정
+    public String upload(String filePath) {
+        File targetFile = new File(filePath);
+        if (!targetFile.exists() || !targetFile.isFile()) {
+            throw new IllegalArgumentException("파일이 존재하지 않습니다: " + filePath);
+        }
+        return upload(targetFile);
+    }
+
+    // byte 배열을 S3에 업로드 (파일 이름을 객체 키로 사용)
+    public String upload(byte[] fileBytes, String fileName) {
+        if (fileBytes == null || fileName == null || fileName.isBlank()) {
+            throw new IllegalArgumentException("fileBytes와 fileName은 null이거나 빈 값일 수 없습니다.");
+        }
+
+        Path tempPath = null;
+        try {
+            tempPath = Files.createTempFile("s3upload-", "");
+            Files.write(tempPath, fileBytes);
+            return upload(tempPath.toFile(), fileName, true);
+        } catch (Exception e) {
+            log.error("byte[] 업로드 실패: {}", e.getMessage());
+            throw new RuntimeException("S3 업로드 실패", e);
+        } finally {
+            if (tempPath != null) {
+                try {
+                    Files.deleteIfExists(tempPath);
+                } catch (Exception ex) {
+                    log.warn("임시 파일 삭제 실패: {}", ex.getMessage());
+                }
+            }
+        }
+    }
+
+    // 로컬 파일 객체를 그대로 업로드
+    public String upload(File uploadFile) {
+        if (uploadFile == null || !uploadFile.exists() || !uploadFile.isFile()) {
+            throw new IllegalArgumentException("유효한 파일을 넣어주세요.");
+        }
+        return upload(uploadFile, uploadFile.getName(), false);
+    }
+
+    private String upload(File uploadFile, String fileName, boolean removeAfterUpload) {
+        try {
+            String url = putS3(uploadFile, fileName);
+            if (removeAfterUpload && uploadFile.exists()) {
+                removeOriginalFile(uploadFile);
+            }
+            return url;
+        } catch (Exception e) {
+            log.error("S3 업로드 실패: {}", e.getMessage());
+            throw new RuntimeException("S3 업로드 실패", e);
+        }
+    }
+
+    // S3에 파일 저장 (public-read 액세스 권한 설정)
+    // 반환 값은 업로드된 객체의 URL
+    private String putS3(File uploadFile, String fileName) {
+        amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile)
+                .withCannedAcl(CannedAccessControlList.PublicRead));
+        log.info("S3 업로드 성공: {}", fileName);
+
+        return amazonS3Client.getUrl(bucket, fileName).toString();
+    }
+
+    // S3 업로드 후 로컬 파일 삭제
+    private void removeOriginalFile(File targetFile) {
+        if (targetFile.exists() && targetFile.delete()) {
+            log.info("로컬 파일 삭제 성공: {}", targetFile.getName());
+            return;
+        } else {
+            log.warn("로컬 파일 삭제 실패: {}", targetFile.getName());
+        }
+    }
+
+    public void removeS3File(String fileName) {
+        try {
+            final DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(bucket, fileName);
+            amazonS3Client.deleteObject(deleteObjectRequest);
+
+            log.info("S3 파일 삭제 성공: {}", fileName);
+
+        } catch (Exception e) {
+            log.error("S3 파일 삭제 실패: {}", e.getMessage());
+            throw new RuntimeException("S3 파일 삭제 실패", e);
+        }
+    }
+
+
+}
+
+
+ The test case did not report any output. 
+
+
+powershell 환경변수
+$env:AWS_REGION = "ap-northeast-2"
+$env:AWS_DEFAULT_REGION = "ap-northeast-2"
+
+
+CMD 환경변수
+set AWS_REGION=ap-northeast-2
+set AWS_DEFAULT_REGION=ap-northeast-2
+
+
+application.yml 수정
+cloud:
+  aws:
+    region:
+      static: ap-northeast-2
+
+
+JVM옵션 : gradle 실행
+./gradlew test -Daws.region=ap-northeast-2      
+
+
+setx AWS_REGION ap-northeast-2
+setx AWS_DEFAULT_REGION ap-northeast-2
+setx AWS_ACCESS_KEY_ID 액세스 값
+setx AWS_SECRET_ACCESS_KEY 시크릿 값

@@ -1,0 +1,49 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.5'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// springboot 3.5.xx기준
+	// AWS SDK for Java v2 (S3 클라이언트 포함)
+	implementation 'software.amazon.awssdk:s3:2.20.0'
+	// Spring Cloud AWS BOM 적용 (버전 관리를 한곳에서 수행)
+    implementation platform("io.awspring.cloud:spring-cloud-aws-dependencies:3.0.0")
+    // S3 전용 스타터 추가
+    implementation "io.awspring.cloud:spring-cloud-aws-starter-s3:3.0.0"
+	
+
+	implementation 'net.coobird:thumbnailator:0.4.14'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	// Source: https://mvnrepository.com/artifact/net.coobird/thumbnailator
+	implementation("net.coobird:thumbnailator:0.4.21")
+
+
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testCompileOnly 'org.projectlombok:lombok'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

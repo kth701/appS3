@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.apps3.util.S3UploaderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-04-07T05:27:13.555Z" hostname="MASTER" time="1.711">
+  <properties/>
+  <testcase name="testUploadRealS3()" classname="com.example.apps3.util.S3UploaderTest" time="1.711"/>
+  <system-out><![CDATA[14:27:11.153 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.apps3.util.S3UploaderTest]: S3UploaderTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:27:11.266 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.apps3.Apps3Application for test class com.example.apps3.util.S3UploaderTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2026-04-07T14:27:11.751+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3UploaderTest    : Starting S3UploaderTest using Java 21.0.9 with PID 45520 (started by kth_7 in C:\Study\200_AWS_Study\aws_project_test\apps3)
+2026-04-07T14:27:11.754+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3UploaderTest    : No active profile set, falling back to 1 default profile: "default"
+2026-04-07T14:27:13.527+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3UploaderTest    : Started S3UploaderTest in 2.066 seconds (process running for 3.269)
+2026-04-07T14:27:14.292+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3UploaderTest    : 테스트 파일 생성됨: C:\upload\test_1775539634287.jpg
+2026-04-07T14:27:14.963+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3Uploader        : S3 업로드 성공: test_1775539634287.jpg
+2026-04-07T14:27:14.965+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3UploaderTest    : 실제 S3 업로드 URL (kth-s3-web-bucket): https://kth-s3-web-bucket.s3.ap-northeast-2.amazonaws.com/test_1775539634287.jpg
+2026-04-07T14:27:15.109+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3UploaderTest    : S3 객체 존재 확인 성공: 버킷=kth-s3-web-bucket, 키=test_1775539634287.jpg, 크기=55 bytes
+2026-04-07T14:27:15.257+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3Uploader        : S3 파일 삭제 성공: test_1775539634287.jpg
+2026-04-07T14:27:15.258+09:00  INFO 45520 --- [apps3] [    Test worker] com.example.apps3.util.S3UploaderTest    : 테스트 후 S3 파일 삭제 완료: test_1775539634287.jpg
+]]></system-out>
+  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\kth_7\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.13\979ce25f7d3096a2e82214ba7dc972a05ce7a171\byte-buddy-agent-1.14.13.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>
